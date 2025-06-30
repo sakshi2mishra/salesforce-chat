@@ -1,0 +1,29 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+</head>
+
+<body>
+    ABCD
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+                embeddedservice_bootstrap.init(
+                    '00DKd000007Vbo8',
+                    'Order_Management_Embedded_Service',
+                    'https://de1733391707655.my.site.com/ESWOrderManagementEmbed1740645729682',
+                    {
+                        scrt2URL: 'https://de1733391707655.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+    <script type='text/javascript'
+        src='https://de1733391707655.my.site.com/ESWOrderManagementEmbed1740645729682/assets/js/bootstrap.min.js'
+        onload='initEmbeddedMessaging()'></script>
+
+</body>
