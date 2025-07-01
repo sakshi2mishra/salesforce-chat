@@ -4,22 +4,31 @@
 
 <body>
     <script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
-			embeddedservice_bootstrap.init(
-				'00DKd000007Vbo8',
-				'Order_Management_External',
-				'https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972',
-				{
-					scrt2URL: 'https://de1733391707655.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-</script>
-<script type='text/javascript' src='https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+                embeddedservice_bootstrap.init(
+                    '00DKd000007Vbo8',
+                    'Order_Management_External',
+                    'https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972',
+                    {
+                        scrt2URL: 'https://de1733391707655.my.salesforce-scrt.com'
+                    }
+                );
+                window.addEventListener("onEmbeddedMessagingReady", e => {
+                    console.log(userId);
+                    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                        "Customer_User_Id": '005Kd000005k7Q7IAI'
+                    });
+                });
+
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+    <script type='text/javascript'
+        src='https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972/assets/js/bootstrap.min.js'
+        onload='initEmbeddedMessaging()'></script>
 </body>
