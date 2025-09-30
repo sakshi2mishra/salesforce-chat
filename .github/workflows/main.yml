@@ -1,0 +1,7 @@
+- name: 'Create env file'
+    run: |
+      touch .env
+      echo API_ENDPOINT="https://de1733391707655.my.salesforce.com/services/oauth2/token" >> .env
+      echo CONSUMER_KEY=${{ secrets.CONSUMER_KEY }} >> .env
+      echo CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }} >> .env
+      cat .env
