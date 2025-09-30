@@ -1,5 +1,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <!-- Include CometD JavaScript client library -->
+    <script src="/cometD.js"></script>
 </head>
 
 <body>
@@ -15,7 +17,7 @@
                     {
                         scrt2URL: 'https://de1733391707655.my.salesforce-scrt.com'
                     }
-                ); 
+                );
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
             }
@@ -24,4 +26,29 @@
     <script type='text/javascript'
         src='https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972/assets/js/bootstrap.min.js'
         onload='initEmbeddedMessaging()'></script>
+    <script type='text/javascript'>
+        const cometDLib = new window.org.cometd.CometD();
+        cometDLib.configure({
+            url: `${window.location.protocol}//${window.location.hostname}/cometd/62.0/`,
+            requestHeaders: {
+                Authorization: `OAuth ${sessionId}`
+            },
+            appendMessageTypeToURL: false,
+            logLevel: 'debug'
+        });
+        cometDLib.websocketEnabled = false;
+        cometDLib.handshake(function (status) {
+            if (status.successful) {
+                cometDLib.subscribe("/event/DCC_Agent_Events__e", async function (message) {
+                    if (message?.data?.payload) {
+                        const payload = message.data.payload;
+                        console.log(JSON.stringify(payload));
+                    }
+                });
+            } else {
+                console.error('Error in handshaking:', JSON.stringify(status));
+            }
+        });
+
+    </script>
 </body>
