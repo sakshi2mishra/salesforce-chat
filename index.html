@@ -42,7 +42,7 @@
         async function connectToPlatformEvents() { 
             const cometDLib = new window.org.cometd.CometD();
             cometDLib.configure({
-                url: `${window.location.protocol}//${window.location.hostname}/cometd/62.0/`,
+                url: "https://de1733391707655.my.salesforce.com/cometd/62.0/",
                 requestHeaders: {
                     Authorization: `OAuth ${await getAccessToken()}`
                 },
