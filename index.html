@@ -27,11 +27,13 @@
         src='https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972/assets/js/bootstrap.min.js'
         onload='initEmbeddedMessaging()'></script>
     <script type='text/javascript'>
+
         const response = fetch("https://de1733391707655.my.salesforce.com/services/oauth2/token", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Access-Control-Allow-Origin": "https://de1733391707655.my.salesforce.com"
+                "Access-Control-Allow-Origin": "https://de1733391707655.my.salesforce.com",
+                "Access-Control-Allow-Credentials": "true"
             },
             body: new URLSearchParams({ grant_type: "client_credentials", client_id: "3MVG9yAAFCYW6OqUQrSHFDWFnNsyX_fDOFqW_GbC8q_imtoXRet5psNNYAZoK4NdYRziE5Tr59duWKX.ffSvi", client_secret: "292FC9AA5B011DD725BA262E3344349B804147EEBDFC7FDDC10DEE18B4626B9A" }),
 
