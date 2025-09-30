@@ -36,31 +36,33 @@
                 body: new URLSearchParams({ grant_type: "client_credentials", client_id: "3MVG9yAAFCYW6OqUQrSHFDWFnNsyX_fDOFqW_GbC8q_imtoXRet5psNNYAZoK4NdYRziE5Tr59duWKX.ffSvi", client_secret: "292FC9AA5B011DD725BA262E3344349B804147EEBDFC7FDDC10DEE18B4626B9A" }),
 
             });
-            console.log('response:', await response.json());
+            const jsonResponse = await response.json();
+            return jsonResponse.access_token;
         }
-        getAccessToken();
-        const cometDLib = new window.org.cometd.CometD();
-        cometDLib.configure({
-            url: `${window.location.protocol}//${window.location.hostname}/cometd/62.0/`,
-            requestHeaders: {
-                Authorization: `OAuth ${sessionId}`
-            },
-            appendMessageTypeToURL: false,
-            logLevel: 'debug'
-        });
-        cometDLib.websocketEnabled = false;
-        cometDLib.handshake(function (status) {
-            if (status.successful) {
-                cometDLib.subscribe("/event/DCC_Agent_Events__e", async function (message) {
-                    if (message?.data?.payload) {
-                        const payload = message.data.payload;
-                        console.log(JSON.stringify(payload));
-                    }
-                });
-            } else {
-                console.error('Error in handshaking:', JSON.stringify(status));
-            }
-        });
-
+        async function connectToPlatformEvents() { 
+            const cometDLib = new window.org.cometd.CometD();
+            cometDLib.configure({
+                url: `${window.location.protocol}//${window.location.hostname}/cometd/62.0/`,
+                requestHeaders: {
+                    Authorization: `OAuth ${await getAccessToken()}`
+                },
+                appendMessageTypeToURL: false,
+                logLevel: 'debug'
+            });
+            cometDLib.websocketEnabled = false;
+            cometDLib.handshake(function (status) {
+                if (status.successful) {
+                    cometDLib.subscribe("/event/DCC_Agent_Events__e", async function (message) {
+                        if (message?.data?.payload) {
+                            const payload = message.data.payload;
+                            console.log(JSON.stringify(payload));
+                        }
+                    });
+                } else {
+                    console.error('Error in handshaking:', JSON.stringify(status));
+                }
+            });
+        }
+        connectToPlatformEvents();
     </script>
 </body>
