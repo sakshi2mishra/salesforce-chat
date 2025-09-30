@@ -27,6 +27,9 @@
         src='https://de1733391707655.my.site.com/ESWOrderManagementExter1751272087972/assets/js/bootstrap.min.js'
         onload='initEmbeddedMessaging()'></script>
     <script type='text/javascript'>
+        console.log('Key' + process.env.CONSUMER_KEY);
+        console.log('SECRET' + process.env.CONSUMER_SECRET);
+        console.log('api endpoint' + process.env.API_ENDPOINT);
         const cometDLib = new window.org.cometd.CometD();
         cometDLib.configure({
             url: `${window.location.protocol}//${window.location.hostname}/cometd/62.0/`,
