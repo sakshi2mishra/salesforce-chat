@@ -36,7 +36,7 @@
                 body: new URLSearchParams({ grant_type: "client_credentials", client_id: "3MVG9yAAFCYW6OqUQrSHFDWFnNsyX_fDOFqW_GbC8q_imtoXRet5psNNYAZoK4NdYRziE5Tr59duWKX.ffSvi", client_secret: "292FC9AA5B011DD725BA262E3344349B804147EEBDFC7FDDC10DEE18B4626B9A" }),
     
             });
-            console.log('response:', response);
+            console.log('response:', await response.json());
         }
         getAccessToken();
         const cometDLib = new window.org.cometd.CometD();
