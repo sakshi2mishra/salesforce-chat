@@ -79,7 +79,6 @@
 
     <div id="default-message" style="display:block;">
         <p>Your order details will be shown here.</p>
-        <button id="okay-btn">Okay</button>
     </div>
     <div id="jeans-section" style="display:none;">
         <h2>Jeans Order Details</h2>
@@ -88,12 +87,18 @@
         <p>Quantity: 2</p>
         <p>Status: Shipped</p>
     </div>
+    <div>
+        <button id="okay-btn">Okay</button>
+    </div>
     <div id="jacket-section" style="display:none;">
         <h2>Jacket Order Details</h2>
         <p>Order ID: 67890</p>
         <p>Product: Leather Jacket</p>
         <p>Quantity: 1</p>
         <p>Status: Processing</p>
+    </div>
+    <div>
+        <button id="okay-btn">Okay</button>
     </div>
     <script>
         // Helper to show/hide sections
@@ -125,6 +130,10 @@
                     document.dispatchEvent(event);
                 });
             }
+        });
+
+        window.addEventListener('click', e => {
+            embeddedservice_bootstrap.utilAPI.sendTextMessage(`I have added the ${e.detail.message}`);
         });
     </script>
 
