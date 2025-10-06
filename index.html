@@ -46,10 +46,8 @@
                 try {
                     const message = JSON.parse(event.data);
                     console.log('Received WebSocket message:', message);
-                    if (typeof message === 'string') {
-                        showSection(message);
-                    } else if (message && message.type) {
-                        showSection(message.type);
+                    if (message.data.payload === 'showJeans' || message.data.payload === 'showJacket') {
+                        showSection(message.data.payload);
                     }
                 } catch (error) {
                     console.error('Error parsing WebSocket message:', error);
@@ -79,6 +77,7 @@
 
     <div id="default-message" style="display:block;">
         <p>Your order details will be shown here.</p>
+        <button id="okay-btn">Okay</button>
     </div>
     <div id="jeans-section" style="display:none;">
         <h2>Jeans Order Details</h2>
@@ -114,6 +113,17 @@
                 defaultMessage.style.display = 'block';
             }
         }
+
+        // Add event listener for Okay button
+        document.addEventListener('DOMContentLoaded', function () {
+            var okayBtn = document.getElementById('okay-btn');
+            if (okayBtn) {
+                okayBtn.addEventListener('click', function () {
+                    const event = new CustomEvent('okayClicked', { detail: { message: 'Okay button was clicked' } });
+                    document.dispatchEvent(event);
+                });
+            }
+        });
     </script>
 
 </html>
