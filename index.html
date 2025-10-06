@@ -48,8 +48,8 @@
                     console.log('Received WebSocket message:', message);
                     console.log('Received WebSocket message:', message.data);
                     console.log('Received WebSocket message:', message.data.payload);
-                    if (message.data.payload === 'showJeans' || message.data.payload === 'showJacket') {
-                        showSection(message.data.payload);
+                    if (message.data.payload.DCC_Context_Identifier__c === 'showJeans' || message.data.payload.DCC_Context_Identifier__c === 'showJacket') {
+                        showSection(message.data.payload.DCC_Context_Identifier__c);
                     }
                 } catch (error) {
                     console.error('Error parsing WebSocket message:', error);
