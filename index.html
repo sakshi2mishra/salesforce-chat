@@ -35,9 +35,9 @@
         var webSocket = new WebSocket('wss://trish-perisarcous-stephan.ngrok-free.dev');
 
         webSocket.onopen = function (event) {
-            wsStatus.textContent = 'Connected';
-            wsStatus.className = 'status connected';
-            logWS('WebSocket connection opened', 'connected');
+            // wsStatus.textContent = 'Connected';
+            //wsStatus.className = 'status connected';
+            console.log('WebSocket connection opened');
         };
 
         webSocket.onmessage = function (event) {
