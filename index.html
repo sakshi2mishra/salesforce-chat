@@ -86,9 +86,9 @@
         <p>Product: Blue Jeans</p>
         <p>Quantity: 2</p>
         <p>Status: Shipped</p>
-    </div>
-    <div>
-        <button id="okay-btn">Okay</button>
+        <div>
+            <button id="okay-btn">Okay</button>
+        </div>
     </div>
     <div id="jacket-section" style="display:none;">
         <h2>Jacket Order Details</h2>
@@ -96,9 +96,9 @@
         <p>Product: Leather Jacket</p>
         <p>Quantity: 1</p>
         <p>Status: Processing</p>
-    </div>
-    <div>
-        <button id="okay-btn">Okay</button>
+        <div>
+            <button id="okay-btn">Okay</button>
+        </div>
     </div>
     <script>
         // Helper to show/hide sections
@@ -124,10 +124,12 @@
         // Add event listener for Okay button
         document.addEventListener('DOMContentLoaded', function () {
             var okayBtn = document.getElementById('okay-btn');
+            console.log('Okay Button:', okayBtn);
             if (okayBtn) {
                 okayBtn.addEventListener('click', function () {
                     const event = new CustomEvent('okayClicked', { detail: { message: 'Okay button was clicked' } });
                     document.dispatchEvent(event);
+                    console.log('Okay button clicked, event dispatched', event);
                 });
             }
         });
