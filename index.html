@@ -31,7 +31,8 @@
         </script>
     <!-- Server Sent Events Client -->
     <script>
-        const eventSource = new EventSource('https://ubiquitous-space-potato-wr44wggvx7992gp6g-3000.app.github.dev');
+        //calling server
+        const eventSource = new EventSource('https://ubiquitous-space-potato-wr44wggvx7992gp6g-3000.app.github.dev/events');
 
         eventSource.onmessage = function (event) {
             const data = JSON.parse(event.data);
