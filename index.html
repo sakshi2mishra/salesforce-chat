@@ -46,6 +46,8 @@
                 try {
                     const message = JSON.parse(event.data);
                     console.log('Received WebSocket message:', message);
+                    console.log('Received WebSocket message:', message.data);
+                    console.log('Received WebSocket message:', message.data.payload);
                     if (message.data.payload === 'showJeans' || message.data.payload === 'showJacket') {
                         showSection(message.data.payload);
                     }
