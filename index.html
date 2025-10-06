@@ -31,17 +31,32 @@
         </script>
     <!-- Server Sent Events Client -->
     <script>
-        //calling server
-        const eventSource = new EventSource('https://ubiquitous-space-potato-wr44wggvx7992gp6g-3000.app.github.dev/events');
+        //const eventSource = new EventSource('http://localhost:3000/events');
+        var webSocket = new WebSocket('wss://trish-perisarcous-stephan.ngrok-free.dev');
 
-        eventSource.onmessage = function (event) {
-            const data = JSON.parse(event.data);
-            console.log(data);
+        webSocket.onopen = function (event) {
+            wsStatus.textContent = 'Connected';
+            wsStatus.className = 'status connected';
+            logWS('WebSocket connection opened', 'connected');
         };
 
-        eventSource.onerror = function (error) {
-            console.error('EventSource failed:', error);
+        webSocket.onmessage = function (event) {
+            try {
+                const message = JSON.parse(event.data);
+                console.log('Received WebSocket message:', message);
+            } catch (error) {
+                console.error('Error parsing WebSocket message:', error);
+            }
         };
+
+        //eventSource.onmessage = function (event) {
+        //  const data = JSON.parse(event.data);
+        // console.log(data);
+        //};
+
+        //eventSource.onerror = function (error) {
+        // console.error('EventSource failed:', error);
+        // };
     </script>
 
     <body>
