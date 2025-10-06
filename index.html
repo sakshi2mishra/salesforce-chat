@@ -97,7 +97,7 @@
         <p>Quantity: 1</p>
         <p>Status: Processing</p>
         <div>
-            <button onclick="embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine')">Okay</button>
+            <button onclick="okayButtonClicked()">Okay</button>
         </div>
     </div>
     <script>
@@ -120,7 +120,10 @@
                 defaultMessage.style.display = 'block';
             }
         }
-
+        function okayButtonClicked() {
+            embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine');
+            console.log('Okay button clicked, message sent');
+        }
     </script>
 
 </html>
