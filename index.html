@@ -87,7 +87,7 @@
         <p>Quantity: 2</p>
         <p>Status: Shipped</p>
         <div>
-            <button id="okay-btn">Okay</button>
+            <button onclick="okayButtonClicked()">Okay</button>
         </div>
     </div>
     <div id="jacket-section" style="display:none;">
@@ -121,7 +121,7 @@
             }
         }
         function okayButtonClicked() {
-            embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine');
+            embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine, show next order details');
             console.log('Okay button clicked, message sent');
         }
     </script>
