@@ -126,7 +126,7 @@
             var okayBtn = document.getElementById('okay-btn');
             console.log('Okay Button:', okayBtn);
             if (okayBtn) {
-                okayBtn.addEventListener('okayButtonClicked', function () {
+                okayBtn.addEventListener('click', function () {
                     embeddedservice_bootstrap.utilAPI.sendTextMessage('Okay');
                     console.log('Okay button clicked, event dispatched');
                 });
