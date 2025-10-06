@@ -97,7 +97,7 @@
         <p>Quantity: 1</p>
         <p>Status: Processing</p>
         <div>
-            <button id="okay-btn">Okay</button>
+            <button onclick="embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine')">Okay</button>
         </div>
     </div>
     <script>
@@ -120,18 +120,6 @@
                 defaultMessage.style.display = 'block';
             }
         }
-
-        // Add event listener for Okay button
-        document.addEventListener('DOMContentLoaded', function () {
-            var okayBtn = document.getElementById('okay-btn');
-            console.log('Okay Button:', okayBtn);
-            if (okayBtn) {
-                okayBtn.addEventListener('click', function () {
-                    embeddedservice_bootstrap.utilAPI.sendTextMessage('Okay');
-                    console.log('Okay button clicked, event dispatched');
-                });
-            }
-        });
 
     </script>
 
