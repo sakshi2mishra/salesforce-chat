@@ -40,14 +40,31 @@
             console.log('WebSocket connection opened');
         };
 
-        webSocket.onmessage = function (event) {
-            try {
-                const message = JSON.parse(event.data);
-                console.log('Received WebSocket message:', message);
-            } catch (error) {
-                console.error('Error parsing WebSocket message:', error);
-            }
-        };
+        // Patch WebSocket handler
+        if (window.webSocket) {
+            webSocket.onmessage = function (event) {
+                try {
+                    const message = JSON.parse(event.data);
+                    console.log('Received WebSocket message:', message);
+                    if (typeof message === 'string') {
+                        showSection(message);
+                    } else if (message && message.type) {
+                        showSection(message.type);
+                    }
+                } catch (error) {
+                    console.error('Error parsing WebSocket message:', error);
+                }
+            };
+        }
+
+        // webSocket.onmessage = function (event) {
+        //     try {
+        //         var message = JSON.parse(event.data);
+        //         console.log('Received WebSocket message:', message);
+        //     } catch (error) {
+        //         console.error('Error parsing WebSocket message:', error);
+        //     }
+        // };
 
         //eventSource.onmessage = function (event) {
         //  const data = JSON.parse(event.data);
@@ -59,6 +76,44 @@
         // };
     </script>
 
-    <body>
+
+    <div id="default-message" style="display:block;">
+        <p>Your order details will be shown here.</p>
+    </div>
+    <div id="jeans-section" style="display:none;">
+        <h2>Jeans Order Details</h2>
+        <p>Order ID: 12345</p>
+        <p>Product: Blue Jeans</p>
+        <p>Quantity: 2</p>
+        <p>Status: Shipped</p>
+    </div>
+    <div id="jacket-section" style="display:none;">
+        <h2>Jacket Order Details</h2>
+        <p>Order ID: 67890</p>
+        <p>Product: Leather Jacket</p>
+        <p>Quantity: 1</p>
+        <p>Status: Processing</p>
+    </div>
+    <script>
+        // Helper to show/hide sections
+        function showSection(message) {
+            const jeansSection = document.getElementById('jeans-section');
+            const jacketSection = document.getElementById('jacket-section');
+            const defaultMessage = document.getElementById('default-message');
+            if (message === 'showJeans') {
+                jeansSection.style.display = 'block';
+                jacketSection.style.display = 'none';
+                defaultMessage.style.display = 'none';
+            } else if (message === 'showJacket') {
+                jeansSection.style.display = 'none';
+                jacketSection.style.display = 'block';
+                defaultMessage.style.display = 'none';
+            } else {
+                jeansSection.style.display = 'none';
+                jacketSection.style.display = 'none';
+                defaultMessage.style.display = 'block';
+            }
+        }
+    </script>
 
 </html>
