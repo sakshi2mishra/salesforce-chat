@@ -126,17 +126,13 @@
             var okayBtn = document.getElementById('okay-btn');
             console.log('Okay Button:', okayBtn);
             if (okayBtn) {
-                okayBtn.addEventListener('click', function () {
-                    const event = new CustomEvent('okayClicked', { detail: { message: 'Okay button was clicked' } });
-                    document.dispatchEvent(event);
-                    console.log('Okay button clicked, event dispatched', event);
+                okayBtn.addEventListener('okayButtonClicked', function () {
+                    embeddedservice_bootstrap.utilAPI.sendTextMessage('Okay');
+                    console.log('Okay button clicked, event dispatched');
                 });
             }
         });
 
-        window.addEventListener('click', e => {
-            embeddedservice_bootstrap.utilAPI.sendTextMessage(`I have added the ${e.detail.message}`);
-        });
     </script>
 
 </html>
