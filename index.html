@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-primary" onclick="okayButtonClicked()">Okay</button>
+                <button class="btn-primary" onclick="okayButtonClicked()">Confirm</button>
                 <button class="btn-secondary" onclick="closeModal()">Close</button>
             </div>
         </div>
@@ -125,7 +125,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-primary" onclick="okayButtonClicked()">Okay</button>
+                <button class="btn-primary" onclick="okayButtonClicked()">Confirm</button>
                 <button class="btn-secondary" onclick="closeModal()">Close</button>
             </div>
         </div>
@@ -152,7 +152,6 @@
         }
         function okayButtonClicked() {
             embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine, show next order details');
-            console.log('Okay button clicked, message sent');
         }
         
         function closeModal() {
