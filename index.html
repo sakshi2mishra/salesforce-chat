@@ -4,6 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>SSE Client</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -57,47 +59,75 @@
             };
         }
 
-        // webSocket.onmessage = function (event) {
-        //     try {
-        //         var message = JSON.parse(event.data);
-        //         console.log('Received WebSocket message:', message);
-        //     } catch (error) {
-        //         console.error('Error parsing WebSocket message:', error);
-        //     }
-        // };
-
-        //eventSource.onmessage = function (event) {
-        //  const data = JSON.parse(event.data);
-        // console.log(data);
-        //};
-
-        //eventSource.onerror = function (error) {
-        // console.error('EventSource failed:', error);
-        // };
     </script>
 
-
-    <div id="default-message" style="display:block;">
-        <p>Your order details will be shown here.</p>
+    <div id="default-message" class="default-message" style="display:block;">
+        <img src="img/home.png" alt="">
     </div>
-    <div id="jeans-section" style="display:none;">
-        <h2>Jeans Order Details</h2>
-        <p>Order ID: 12345</p>
-        <p>Product: Blue Jeans</p>
-        <p>Quantity: 2</p>
-        <p>Status: Shipped</p>
-        <div>
-            <button onclick="okayButtonClicked()">Okay</button>
+    <!-- Jeans Modal -->
+    <div id="jeans-section" class="modal-overlay" style="display:none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Jeans Order Details</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-info">
+                    <div class="info-item">
+                        <span class="label">Order ID:</span>
+                        <span class="value">12345</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Product:</span>
+                        <span class="value">Blue Jeans</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Quantity:</span>
+                        <span class="value">2</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Status:</span>
+                        <span class="value status-shipped">Shipped</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="okayButtonClicked()">Okay</button>
+                <button class="btn-secondary" onclick="closeModal()">Close</button>
+            </div>
         </div>
     </div>
-    <div id="jacket-section" style="display:none;">
-        <h2>Jacket Order Details</h2>
-        <p>Order ID: 67890</p>
-        <p>Product: Leather Jacket</p>
-        <p>Quantity: 1</p>
-        <p>Status: Processing</p>
-        <div>
-            <button onclick="okayButtonClicked()">Okay</button>
+    <!-- Jacket Modal -->
+    <div id="jacket-section" class="modal-overlay" style="display:none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Jacket Order Details</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-info">
+                    <div class="info-item">
+                        <span class="label">Order ID:</span>
+                        <span class="value">67890</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Product:</span>
+                        <span class="value">Leather Jacket</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Quantity:</span>
+                        <span class="value">1</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Status:</span>
+                        <span class="value status-processing">Processing</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="okayButtonClicked()">Okay</button>
+                <button class="btn-secondary" onclick="closeModal()">Close</button>
+            </div>
         </div>
     </div>
     <script>
@@ -107,22 +137,32 @@
             const jacketSection = document.getElementById('jacket-section');
             const defaultMessage = document.getElementById('default-message');
             if (message === 'showJeans') {
-                jeansSection.style.display = 'block';
+                jeansSection.style.display = 'flex';
                 jacketSection.style.display = 'none';
                 defaultMessage.style.display = 'none';
             } else if (message === 'showJacket') {
                 jeansSection.style.display = 'none';
-                jacketSection.style.display = 'block';
+                jacketSection.style.display = 'flex';
                 defaultMessage.style.display = 'none';
             } else {
                 jeansSection.style.display = 'none';
                 jacketSection.style.display = 'none';
-                defaultMessage.style.display = 'block';
+                defaultMessage.style.display = 'flex';
             }
         }
         function okayButtonClicked() {
             embeddedservice_bootstrap.utilAPI.sendTextMessage('Looks fine, show next order details');
             console.log('Okay button clicked, message sent');
+        }
+        
+        function closeModal() {
+            const jeansSection = document.getElementById('jeans-section');
+            const jacketSection = document.getElementById('jacket-section');
+            const defaultMessage = document.getElementById('default-message');
+            
+            jeansSection.style.display = 'none';
+            jacketSection.style.display = 'none';
+            defaultMessage.style.display = 'flex';
         }
     </script>
 
