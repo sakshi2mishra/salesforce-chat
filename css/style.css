@@ -46,6 +46,8 @@ body {
   overflow: hidden;
   position: relative;
   animation: slideUp 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
@@ -91,6 +93,8 @@ body {
 .modal-body {
   padding: 30px;
   background: white;
+  flex: 1;
+  overflow: auto;
 }
 
 .order-info {
